@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torchpwl
-
 
 class SeqConv3x3(nn.Module):
     def __init__(self, seq_type, inp_planes, out_planes, depth_multiplier):

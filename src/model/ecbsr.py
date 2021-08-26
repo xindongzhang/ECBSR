@@ -4,7 +4,6 @@ import torch.nn.functional as F
 import torch.nn as nn
 import torch
 import torchsummary
-import torchpwl
 
 from model.ecb import ECB
 
