@@ -55,6 +55,10 @@ For universal CPU & GPU of mobile hardware implementation.
 
 For NPU inplementation of Rockchip hardware, e.g. RK3399Pro/RK1808.
 
+### MiniNet (Come soon!)
+
+A super light-weight CNN inference framework implemented by us, with only conv-3x3, element-wise op, ReLU(PReLU) activations, and pixel-shuffle for common super resolution task. For more details, please refer to /ECBSR/deploy/mininet
+
 ## Citation
 ----------
 ```BibTex
