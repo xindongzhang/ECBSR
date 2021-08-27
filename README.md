@@ -65,6 +65,7 @@ A super light-weight CNN inference framework implemented by us, with only conv-3
 @article{zhang2021edge,
   title={Edge-oriented Convolution Block for Real-time Super Resolution on Mobile Devices},
   author={Zhang, Xindong and Zeng, Hui and Zhang, Lei},
+  booktitle={Proceedings of the 29th ACM International Conference on Multimedia (ACM MM)},
   year={2021}
 }
 ```
