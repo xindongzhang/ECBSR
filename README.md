@@ -7,7 +7,7 @@
 
 ## Codes
 
-The implementation based on [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch) is place on **/legacy** folder. For more details, please refre to [/legacy/README.md](https://github.com/xindongzhang/ECBSR/tree/main/legacy/README.md). The following is the lighten version implemented by us.
+An older version implemented based on [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch) is place on **/legacy** folder. For more details, please refre to [/legacy/README.md](https://github.com/xindongzhang/ECBSR/tree/main/legacy/README.md). The following is the lighten version implemented by us.
 
 ### Dependencies & Installation
 

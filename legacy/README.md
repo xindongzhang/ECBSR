@@ -37,27 +37,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py --model ECBSR --scale 2 --patch_size 128 -
 CUDA_VISIBLE_DEVICES=0 python main.py --model ECBSR --scale 4 --patch_size 256 --save NAME_OF_OUTPUT_FOLDER --reset --m_ecbsr 4 --c_ecbsr 16 --ecbsr_idt 0 --act prelu
 ```
 
-## Hardware deployment
-
-### AI-Benchmark
-
-You can download the newest version of evaluation tool from [AI-Benchmark](https://www.google.com.hk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwi5nIj7iMryAhVEZd4KHX5dCpIQFnoECAsQAw&url=https%3A%2F%2Fai-benchmark.com%2F&usg=AOvVaw3uZGyMiu_MMWy5_cLGpH8N). Then you can install the app via ADB tools,
-
-```
-adb install -r [name-of-ai-benchmar].apk
-```
-
-### MNN (Come soon!)
-
-For universal CPU & GPU of mobile hardware implementation.
-
-### RKNN (Come soon!)
-
-For NPU inplementation of Rockchip hardware, e.g. RK3399Pro/RK1808.
-
-### MiniNet (Come soon!)
-
-A super light-weight CNN inference framework implemented by us, with only conv-3x3, element-wise op, ReLU(PReLU) activations, and pixel-shuffle for common super resolution task. For more details, please refer to /ECBSR/deploy/mininet
 
 ## Citation
 ----------
