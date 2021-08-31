@@ -7,36 +7,34 @@
 
 ## Codes
 
-The implementation based on [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch) is place on **/legacy** folder. For more details, please refre to [/legacy/README.md](https://github.com/xindongzhang/ECBSR/tree/main/legacy/README.md). The following is the lighten version implemented by us.
+This implementation largely depends on [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch). A lighten version will be released soon.
 
 ### Dependencies & Installation
 
-Please refer to the following simple steps for installation.
+The dependencies and installation of code base can refer to [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch). Then, move the archs and network of ECBSR to the code base of EDSR by:
 
 ```
-git clone https://github.com/xindongzhang/ECBSR.git
-cd ECBSR
-pip install -r requirements.txt
+mv [ECBSR]/src/option.py [EDSR]/src/
+mv [ECBSR]/src/model/ecb.py [EDSR]/src/model
+mv [ECBSR]/src/model/ecbsr.py [EDSR]/src/model
 ```
-
-Training and benchmarking data can be downloaded from [DIV2K](https://cv.snu.ac.kr/research/EDSR/DIV2K.tar) and [benchmar](https://cv.snu.ac.kr/research/EDSR/benchmark.tar), respectively. Thanks for excellent work by EDSR.
 
 ### Training & Testing
-You could also try less/larger batch-size, if there are limited/enough hardware resources in your GPU-server.
+Trained & tested on Pytorch-1.2.0. You could also try less/larger batch-size, if there are limited/enough hardware resources in your GPU-server.
 ```
-cd ECBSR
+cd [EDSR]/src/
 
-## ecbsr-m4c8-x2-prelu(you can revise the parameters of the yaml-config file accordding to your environments)
-python train.py --config ./configs/ecbsr_x2_m4c8_prelu.yml
+## ecbsr-m4c8-x2-prelu(revise the NAME_OF_OUTPUT_FOLDER to your selected folder)
+CUDA_VISIBLE_DEVICES=0 python main.py --model ECBSR --scale 2 --patch_size 128 --save NAME_OF_OUTPUT_FOLDER --reset --m_ecbsr 4 --c_ecbsr 8 --ecbsr_idt 0 --act prelu
 
 ## ecbsr-m4c8-x4-prelu
-python train.py --config ./configs/ecbsr_x4_m4c8_prelu.yml
+CUDA_VISIBLE_DEVICES=0 python main.py --model ECBSR --scale 4 --patch_size 256 --save NAME_OF_OUTPUT_FOLDER --reset --m_ecbsr 4 --c_ecbsr 8 --ecbsr_idt 0 --act prelu
 
 ## ecbsr-m4c16-x2-prelu
-python train.py --config ./configs/ecbsr_x2_m4c16_prelu.yml
+CUDA_VISIBLE_DEVICES=0 python main.py --model ECBSR --scale 2 --patch_size 128 --save NAME_OF_OUTPUT_FOLDER --reset --m_ecbsr 4 --c_ecbsr 16 --ecbsr_idt 0 --act prelu
 
 ## ecbsr-m4c16-x4-prelu
-python train.py --config ./configs/ecbsr_x4_m4c16_prelu.yml
+CUDA_VISIBLE_DEVICES=0 python main.py --model ECBSR --scale 4 --patch_size 256 --save NAME_OF_OUTPUT_FOLDER --reset --m_ecbsr 4 --c_ecbsr 16 --ecbsr_idt 0 --act prelu
 ```
 
 ## Hardware deployment
@@ -74,4 +72,4 @@ A super light-weight CNN inference framework implemented by us, with only conv-3
 
 
 ## Acknowledgement
-Thanks [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch) for the pioneering work and excellent codebase! The implementation integrated with EDSR is placed on [/legacy](https://github.com/xindongzhang/ECBSR/tree/main/legacy)
+This implementation largely depends on [EDSR](https://github.com/sanghyun-son/EDSR-PyTorch). Thanks for the excellent codebase! Our lighten version will come soon.

@@ -1,0 +1,36 @@
+## parameters for ecbsr
+scale: 2
+colors: 1
+m_ecbsr: 4
+c_ecbsr: 8
+idt_ecbsr: 0
+act_type: 'prelu'
+pretrain: null
+
+## parameters for model training
+patch_size: 128
+batch_size: 32
+data_repeat: 64
+data_augment: 1
+epochs: 1000
+log_every: 100
+test_every: 1
+log_path: "./experiments"
+lr: 0.0005
+store_in_ram: 1
+
+## hardware specification
+gpu_id: 0
+threads: 4
+
+## data specification
+div2k_hr_path: '/home/zhangxindong/SR_datasets/DIV2K/DIV2K_train_HR'
+div2k_lr_path: '/home/zhangxindong/SR_datasets/DIV2K/DIV2K_train_LR_bicubic'
+set5_hr_path: '/home/zhangxindong/SR_datasets/benchmark/Set5/HR'
+set5_lr_path: '/home/zhangxindong/SR_datasets/benchmark/Set5/LR_bicubic'
+set14_hr_path: '/home/zhangxindong/SR_datasets/benchmark/Set14/HR'
+set14_lr_path: '/home/zhangxindong/SR_datasets/benchmark/Set14/LR_bicubic'
+b100_hr_path: '/home/zhangxindong/SR_datasets/benchmark/B100/HR'
+b100_lr_path: '/home/zhangxindong/SR_datasets/benchmark/B100/LR_bicubic'
+u100_hr_path: '/home/zhangxindong/SR_datasets/benchmark/Urban100/HR'
+u100_lr_path: '/home/zhangxindong/SR_datasets/benchmark/Urban100/LR_bicubic'
