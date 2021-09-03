@@ -41,7 +41,21 @@ python train.py --config ./configs/ecbsr_x4_m4c16_prelu.yml
 
 ## Hardware deployment
 
-We provide [convertor](https://github.com/xindongzhang/ECBSR/blob/main/convert.py) for model conversion to different frontend, e.g. onnx(currently support)/pb/tflite.
+
+### Frontend conversion
+
+We provide [convertor](https://github.com/xindongzhang/ECBSR/blob/main/convert.py) for model conversion to different frontend, e.g. onnx/pb/tflite. We currently developed and tested the model with only one-channel(Y out of Ycbcr). Since the internal data-layout are quite different between tf(NHWC) and pytorch(NCHW), espetially for the pixelshuffle operation. Care must be taken to handle the data-layout, if you want to extend the pytorch-based training framework to RGB input data, then deploy it on tensorflow. Follow are the demo scripts for model conversion to specific frontend:
+
+```
+## convert the trained pytorch model to onnx with plain-topology.
+python convert.py --config xxx.yml --target_frontend onnx --output_folder XXX --inp_n 1 --inp_c 1 --inp_h 270 --inp_w 480
+
+## convert the trained pytorch model to pb-1.x with plain-topology.
+python convert.py --config xxx.yml --target_frontend pb-1.x --output_folder XXX --inp_n 1 --inp_c 1 --inp_h 270 --inp_w 480
+
+## convert the trained pytorch model to pb-ckpt with plain-topology
+python convert.py --config xxx.yml --target_frontend pb-ckpt --output_folder XXX --inp_n 1 --inp_c 1 --inp_h 270 --inp_w 480
+```
 
 ### AI-Benchmark
 
