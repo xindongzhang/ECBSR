@@ -41,6 +41,8 @@ python train.py --config ./configs/ecbsr_x4_m4c16_prelu.yml
 
 ## Hardware deployment
 
+We provide [convertor](https://github.com/xindongzhang/ECBSR/blob/main/convert.py) for model conversion to different frontend, e.g. onnx(currently support)/pb/tflite.
+
 ### AI-Benchmark
 
 You can download the newest version of evaluation tool from [AI-Benchmark](https://www.google.com.hk/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwi5nIj7iMryAhVEZd4KHX5dCpIQFnoECAsQAw&url=https%3A%2F%2Fai-benchmark.com%2F&usg=AOvVaw3uZGyMiu_MMWy5_cLGpH8N). Then you can install the app via ADB tools,
@@ -60,6 +62,11 @@ For NPU inplementation of Rockchip hardware, e.g. RK3399Pro/RK1808.
 ### MiniNet (Come soon!)
 
 A super light-weight CNN inference framework implemented by us, with only conv-3x3, element-wise op, ReLU(PReLU) activations, and pixel-shuffle for common super resolution task. For more details, please refer to /ECBSR/deploy/mininet
+
+
+### Quantization tools (Come soon!)
+
+For fixed-arithmetic quantization of image super resolution.
 
 ## Citation
 ----------
