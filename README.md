@@ -22,7 +22,7 @@ pip install -r requirements.txt
 Training and benchmarking data can be downloaded from [DIV2K](https://cv.snu.ac.kr/research/EDSR/DIV2K.tar) and [benchmark](https://cv.snu.ac.kr/research/EDSR/benchmark.tar), respectively. Thanks for excellent work by EDSR.
 
 ### Training & Testing
-You could also try less/larger batch-size, if there are limited/enough hardware resources in your GPU-server.
+You could also try less/larger batch-size, if there are limited/enough hardware resources in your GPU-server. ECBSR is trained and tested with colors=1, e.g Y channel out of Ycbcr.
 ```
 cd ECBSR
 

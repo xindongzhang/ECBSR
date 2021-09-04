@@ -22,7 +22,7 @@ parser.add_argument('--config', type=str, default=None, help = 'pre-config file 
 
 ## paramters for ecbsr
 parser.add_argument('--scale', type=int, default=2, help = 'scale for sr network')
-parser.add_argument('--colors', type=int, default=1, help = '1(Y channls of YCbCr), 3(RGB)')
+parser.add_argument('--colors', type=int, default=1, help = '1(Y channls of YCbCr)')
 parser.add_argument('--m_ecbsr', type=int, default=4, help = 'number of ecb')
 parser.add_argument('--c_ecbsr', type=int, default=8, help = 'channels of ecb')
 parser.add_argument('--idt_ecbsr', type=int, default=0, help = 'incorporate identity mapping in ecb or not')
@@ -64,6 +64,9 @@ if __name__ == '__main__':
        yaml_args = yaml.load(open(args.config), Loader=yaml.FullLoader)
        opt.update(yaml_args)
     
+    if args.colors == 3:
+        raise ValueError("ECBSR is trained and tested with colors=1.")
+
     device = None
     if args.gpu_id >= 0 and torch.cuda.is_available():
         print("use cuda & cudnn for acceleration!")
