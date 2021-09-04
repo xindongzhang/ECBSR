@@ -44,7 +44,7 @@ python train.py --config ./configs/ecbsr_x4_m4c16_prelu.yml
 
 ### Frontend conversion
 
-We provide [convertor](https://github.com/xindongzhang/ECBSR/blob/main/convert.py) for model conversion to different frontend, e.g. onnx/pb/tflite. We currently developed and tested the model with only one-channel(Y out of Ycbcr). Since the internal data-layout are quite different between tf(NHWC) and pytorch(NCHW), espetially for the pixelshuffle operation. Care must be taken to handle the data-layout, if you want to extend the pytorch-based training framework to RGB input data, then deploy it on tensorflow. Follow are the demo scripts for model conversion to specific frontend:
+We provide [convertor](https://github.com/xindongzhang/ECBSR/blob/main/convert.py) for model conversion to different frontend, e.g. onnx/pb/tflite. We currently developed and tested the model with only one-channel(Y out of Ycbcr). Since the internal data-layout are quite different between tf(NHWC) and pytorch(NCHW), espetially for the pixelshuffle operation. Care must be taken to handle the data-layout, if you want to extend the pytorch-based training framework to RGB input data and deploy it on tensorflow. Follow are the demo scripts for model conversion to specific frontend:
 
 ```
 ## convert the trained pytorch model to onnx with plain-topology.
