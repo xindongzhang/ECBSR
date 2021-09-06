@@ -138,6 +138,7 @@ if __name__ == '__main__':
     for epoch in range(args.epochs):
         epoch_loss = 0.0
         stat_dict['epochs'] = epoch
+        model = model.train()
         print("##===========Epoch: {}=============##".format(epoch))
         for iter, batch in enumerate(train_dataloader):
             optimizer.zero_grad()
@@ -171,6 +172,7 @@ if __name__ == '__main__':
         if (epoch + 1) % args.test_every == 0:
             torch.set_grad_enabled(False)
             test_log = ""
+            model = model.eval()
             for valid_dataloader in valid_dataloaders:
                 avg_psnr = 0.0
                 avg_ssim = 0.0
