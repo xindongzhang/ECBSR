@@ -79,7 +79,7 @@ class DIV2K(data.Dataset):
             lr_patch, hr_patch = lr[ly:ly+lp, lx:lx+lp, :], hr[hy:hy+hp, hx:hx+hp, :]
             # augment data
             if self.augment:
-                print("data augmentation!")
+                #print("data augmentation!")
                 hflip = random.random() > 0.5
                 vflip = random.random() > 0.5
                 rot90 = random.random() > 0.5
