@@ -22,8 +22,8 @@ def tf_conv3x3(inp, out_channels, act_type):
         raise ValueError('invalid act-type for tensorflow!')
     return y
 
-def plainsr_tf(module_nums, channel_nums, act_type, scale, colors):
-    inp = Input(shape=(None, None, colors))
+def plainsr_tf(module_nums, channel_nums, act_type, scale, colors, input_h, input_w):
+    inp = Input(shape=(input_h, input_w, colors))
     ## head
     y = tf_conv3x3(inp, channel_nums, act_type)
     ## body
@@ -33,13 +33,18 @@ def plainsr_tf(module_nums, channel_nums, act_type, scale, colors):
         ## tail
         y = tf_conv3x3(y, colors*scale*scale, 'linear')
         y = y + inp
-        y = tf.clip_by_value(y, 0.0, 255.0)
+        # y = tf.clip_by_value(y, 0.0, 255.0)
+        # y = tf.clip_by_value(y, 0.0, 1.0)
         ## upscaling
         out = tf.nn.depth_to_space(y, scale, data_format='NHWC')
+    # if colors == 1:
+    #     y = tf_conv3x3(y, colors*scale*scale, 'linear')
+    #     out = tf.nn.depth_to_space(y, scale, data_format='NHWC') + tf.keras.layers.UpSampling2D(size=(scale, scale), data_format=None, interpolation='nearest')(inp)
+    #     out = tf.clip_by_value(out, 0.0, 1.0)
     elif colors == 3:
         ## since internal data layout bwtween pytorch and tensorflow are quite different, e.g. NCHW for pytorch, NHWC for tensorflow
         ## input data layout of pixel-shuffle needs to be carefully handled
-
+        
         ## tail
         y = tf_conv3x3(y, colors*scale*scale, 'linear')
         

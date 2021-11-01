@@ -31,7 +31,7 @@ parser.add_argument('--idt_ecbsr', type=int, default=0, help = 'incorporate iden
 parser.add_argument('--act_type', type=str, default='prelu', help = 'prelu, relu, splus, rrelu')
 parser.add_argument('--pretrain', type=str, default=None, help = 'path of pretrained model')
 
-parser.add_argument('--target_frontend', type=str, default='pb-ckpt', help = 'target front-end for inference engine, e.g. onnx/pb-ckpt/pb-1.x/pb-2.x')
+parser.add_argument('--target_frontend', type=str, default='pb-ckpt', help = 'target front-end for inference engine, e.g. onnx/pb-ckpt/pb-1.x/pb-2.x/tflite-fp32')
 parser.add_argument('--output_folder', type=str, default='./', help = 'output folder')
 
 parser.add_argument('--is_dynamic_batches', type=int, default=0, help = 'dynamic batches or not')
@@ -104,10 +104,11 @@ if __name__ == '__main__':
 
     elif args.target_frontend == 'pb-ckpt' or \
          args.target_frontend == 'pb-1.x'  or \
-         args.target_frontend == 'pb-2.x':
+         args.target_frontend == 'pb-2.x'  or \
+         args.target_frontend == 'tflite-fp32':
         # output_name = os.path.join(args.output_folder, output_name + '.pb')
         tf_raw_dir = os.path.join(args.output_folder, output_name )
-        model_plain_tf = plainsr_tf(args.m_ecbsr, args.c_ecbsr, args.act_type, args.scale, args.colors)
+        model_plain_tf = plainsr_tf(args.m_ecbsr, args.c_ecbsr, args.act_type, args.scale, args.colors, args.inp_h, args.inp_w)
 
         depth  = len(model_plain.backbone)
         tf_idx = 0
@@ -140,6 +141,24 @@ if __name__ == '__main__':
         if args.target_frontend == 'pb-ckpt':
             # save checkpoints
             model_plain_tf.save(tf_raw_dir, overwrite=True, include_optimizer=False, save_format='tf')
+        if args.target_frontend == 'tflite-fp32':
+             # save checkpoints
+            model_plain_tf.save(tf_raw_dir, overwrite=True, include_optimizer=False, save_format='tf')        
+            # # Load trained SavedModel
+            model = tf.saved_model.load(tf_raw_dir)
+            # Setup fixed input shape
+            input_shape = [1, args.inp_h, args.inp_w, args.inp_c]
+            concrete_func = model.signatures[tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY]
+            concrete_func.inputs[0].set_shape(input_shape)
+            # Get tf.lite converter instance
+            converter = tf.lite.TFLiteConverter.from_concrete_functions([concrete_func])
+            # Use full integer operations in quantized model
+            # converter.optimizations = [tf.lite.Optimize.DEFAULT]
+            converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_LATENCY]  
+            converter.inference_input_type = tf.float32
+            converter.inference_output_type = tf.float32
+            tflite_model = converter.convert()
+            open('{}/model.tflite'.format(tf_raw_dir), 'wb').write(tflite_model) 
         elif args.target_frontend == 'pb-1.x':
             # save pb, tensorflow-1.x
             with tf_keras_backend.get_session() as sess:
@@ -169,10 +188,6 @@ if __name__ == '__main__':
                 name="model.pb",
                 as_text=False
             )
-
-    elif args.target_frontend == 'tflite':
-        output_name = os.path.join(args.output_folder, output_name + '.tflite')
-        raise ValueError('TBD')
     else:
         raise ValueError('invalid type of frontend!')
     
