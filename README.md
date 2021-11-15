@@ -85,10 +85,11 @@ For fixed-arithmetic quantization of image super resolution.
 ## Citation
 ----------
 ```BibTex
-@article{zhang2021edge,
+@inproceedings{zhang2021edge,
   title={Edge-oriented Convolution Block for Real-time Super Resolution on Mobile Devices},
   author={Zhang, Xindong and Zeng, Hui and Zhang, Lei},
-  booktitle={Proceedings of the 29th ACM International Conference on Multimedia (ACM MM)},
+  booktitle={Proceedings of the 29th ACM International Conference on Multimedia},
+  pages={4034--4043},
   year={2021}
 }
 ```
